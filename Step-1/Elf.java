@@ -13,11 +13,16 @@ public class Elf implements Runnable {
 	private int number;
 	private Random rand = new Random();
 	private SantaScenario scenario;
+	private boolean terminate = false;
 
 	public Elf(int number, SantaScenario scenario) {
 		this.number = number;
 		this.scenario = scenario;
 		this.state = ElfState.WORKING;
+	}
+
+	public void deferredTerminate() {
+		terminate = true;
 	}
 
 
@@ -36,7 +41,8 @@ public class Elf implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (!terminate) {
+		//while (true) {
       // wait a day
   		try {
   			Thread.sleep(100);

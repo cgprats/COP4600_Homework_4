@@ -7,6 +7,7 @@ public class Reindeer implements Runnable {
 	private ReindeerState state;
 	private SantaScenario scenario;
 	private Random rand = new Random();
+	private boolean terminate = false;
 
 	/**
 	 * The number associated with the reindeer
@@ -19,9 +20,14 @@ public class Reindeer implements Runnable {
 		this.state = ReindeerState.AT_BEACH;
 	}
 
+	public void deferredTerminate() {
+		terminate = true;
+	}
+
 	@Override
 	public void run() {
-		while(true) {
+		while (!terminate) {
+		//while(true) {
 		// wait a day
 		try {
 			Thread.sleep(100);

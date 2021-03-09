@@ -5,15 +5,21 @@ public class Santa implements Runnable {
 
 	enum SantaState {SLEEPING, READY_FOR_CHRISTMAS, WOKEN_UP_BY_ELVES, WOKEN_UP_BY_REINDEER};
 	private SantaState state;
+	private boolean terminate = false;
 	
 	public Santa(SantaScenario scenario) {
 		this.state = SantaState.SLEEPING;
+	}
+
+	public void deferredTerminate() {
+		terminate = true;
 	}
 	
 	
 	@Override
 	public void run() {
-		while(true) {
+		//while(true) {
+		while (!terminate) {
 			// wait a day...
 			try {
 				Thread.sleep(100);

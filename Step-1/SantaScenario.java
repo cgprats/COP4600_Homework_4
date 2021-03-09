@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 
 
@@ -9,6 +10,16 @@ public class SantaScenario {
 	public List<Elf> elves;
 	public List<Reindeer> reindeers;
 	public boolean isDecember;
+
+	public void deferredTerminate() {
+		santa.deferredTerminate();
+		for (int i = 0; i < elves.size(); i++) {
+			elves.get(i).deferredTerminate();
+		}
+		for (int i = 0; i < reindeers.size(); i++) {
+			reindeers.get(i).deferredTerminate();
+		}
+	}
 	
 	public static void main(String args[]) {
 		SantaScenario scenario = new SantaScenario();
@@ -55,6 +66,9 @@ public class SantaScenario {
 			}
 			for(Reindeer reindeer: scenario.reindeers) {
 				reindeer.report();
+			}
+			if (day == 370) {
+				scenario.deferredTerminate();
 			}
 		}
 	}
