@@ -8,7 +8,7 @@ public class Santa implements Runnable {
 	private SantaState state;
 	private boolean terminate = false;
 	private Elf elfAtDoor;
-	
+
 	public Santa(SantaScenario scenario) {
 		this.state = SantaState.SLEEPING;
 	}
@@ -21,8 +21,7 @@ public class Santa implements Runnable {
 		elfAtDoor = wakingElf;
 		state = SantaState.WOKEN_UP_BY_ELVES;
 	}
-	
-	
+
 	@Override
 	public void run() {
 		//while(true) {

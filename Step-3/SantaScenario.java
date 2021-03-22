@@ -10,6 +10,7 @@ public class SantaScenario {
 	public List<Elf> elves;
 	//public List<Reindeer> reindeers;
 	public boolean isDecember;
+	public List<Elf> elvesInTrouble = new ArrayList<>();
 
 	public void deferredTerminate() {
 		santa.deferredTerminate();

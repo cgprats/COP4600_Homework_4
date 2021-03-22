@@ -54,6 +54,9 @@ public class Elf implements Runnable {
 			case WORKING: {
 				// at each day, there is a 1% chance that an elf runs into
 				// trouble.
+				if (scenario.elvesInTrouble.contains(this)) {
+					scenario.elvesInTrouble.remove(this);
+				}
 				if (rand.nextDouble() < 0.01) {
 					state = ElfState.TROUBLE;
 				}
@@ -61,7 +64,15 @@ public class Elf implements Runnable {
 			}
 			case TROUBLE:
 				// FIXME: if possible, move to Santa's door
-				state = ElfState.AT_SANTAS_DOOR;
+				if (scenario.elvesInTrouble.size() < 3 && !scenario.elvesInTrouble.contains(this)) {
+					scenario.elvesInTrouble.add(this);
+				}
+				if (scenario.elvesInTrouble.size() == 3) {
+					for (int i = 0; i < 3; i++) {
+						scenario.elvesInTrouble.get(i).setState(ElfState.AT_SANTAS_DOOR);
+					}
+				}
+				//state = ElfState.AT_SANTAS_DOOR;
 				break;
 			case AT_SANTAS_DOOR:
 				// FIXME: if feasible, wake up Santa
